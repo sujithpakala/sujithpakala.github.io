@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name</title>
+  <meta name="description" content="Your minimalist personal site" />
+  <meta property="og:title" content="Your Name" />
+  <meta property="og:description" content="Design • code • writing" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --bg:#151517;
+      --card:#1c1c20;
+      --text:#eaeaf2;
+      --muted:#b7b7c7;
+      --link:#7db2ff;
+      --rule:#2a2a31;
+      --maxw:760px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+      color:var(--text); background:var(--bg);
+      display:flex; justify-content:center;
+    }
+    .wrap{width:100%; max-width:var(--maxw); padding:72px 24px 48px}
+    h1{font-size:34px; margin:0 0 20px; font-weight:800}
+    p{margin:0 0 14px}
+    .muted{color:var(--muted)}
+    a{color:var(--link); text-decoration:none}
+    a:hover{ text-decoration:underline }
+    .section-title{font-weight:800; margin-top:30px; margin-bottom:8px; font-size:22px}
+    hr{border:0; border-top:1px solid var(--rule); margin:48px 0}
+
+    /* Fortune card */
+    .fortune{
+      background:var(--card); border-radius:14px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,.4);
+      width:min(520px,100%); margin:28px auto; text-align:center
+    }
+    .fortune .quote{font-weight:700; margin-bottom:6px}
+    .fortune .nums{font-size:14px; color:var(--muted)}
+
+    /* Footer */
+    .footer{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center}
+    .badges a{margin-right:10px}
+
+    /* Responsive tweaks */
+    @media (max-width:520px){
+      h1{font-size:28px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Your Name</h1>
+
+    <p>Hey! I’m <strong>Your Name</strong> (he/him). I love design, photography, data journalism, and the occasional dash of formal methods.</p>
+    <p>I recently graduated from <em>Brown University</em>, where I studied Mathematics, Computer Science, and Visual Arts. I was a TA for courses like discrete math, programming languages, compilers, and applied cryptography. I’m passionate about student teaching and built internal tools to support TAs in their role. I’m currently moving to NYC.</p>
+
+    <div class="section-title">contact</div>
+    <p>Please feel free to reach out via any of the profiles below. A copy of my résumé is also available on request.</p>
+
+    <div class="fortune" id="fortune">
+      <div class="quote">Loading wisdom…</div>
+      <div class="nums">Lucky Numbers: —</div>
+    </div>
+
+    <hr />
+
+    <p class="muted">here’s my
+      <a href="#" id="gh">github</a>,
+      <a href="#" id="li">linkedin</a>,
+      <a href="#" id="ig">instagram</a>,
+      <a href="#" id="dc">discord</a>, and
+      <a href="#" id="kb">keybase</a>.
+    </p>
+
+    <p class="muted" id="updated">Last updated <code>0000000</code> on <span></span>. &lt;3</p>
+  </main>
+
+  <script>
+    // 1) Fortune-like blurb
+    const fortunes = [
+      "Adversity is the parent of virtue.",
+      "Small steps make long journeys.",
+      "Stay curious. Build often.",
+      "Less, but better.",
+      "Systems > goals." 
+    ];
+    function randomLucky(){
+      const nums = Array.from({length:6},()=> Math.floor(Math.random()*70)+1);
+      return nums.join(', ');
+    }
+    function drawFortune(){
+      const f = document.getElementById('fortune');
+      f.querySelector('.quote').textContent = fortunes[Math.floor(Math.random()*fortunes.length)];
+      f.querySelector('.nums').textContent = 'Lucky Numbers: ' + randomLucky();
+    }
+    drawFortune();
+
+    // 2) "Last updated" helper — replace hash with your latest git short SHA
+    const updated = document.getElementById('updated');
+    const now = new Date();
+    updated.querySelector('span').textContent = now.toLocaleDateString(undefined, { day:'2-digit', month:'short', year:'numeric' });
+    // Put your own 7-char commit here once deployed via GitHub Pages/Netlify
+    // updated.querySelector('code').textContent = '22d770e';
+
+    // 3) Socials (fill with your URLs)
+    document.getElementById('gh').href = 'https://github.com/yourname';
+    document.getElementById('li').href = 'https://www.linkedin.com/in/yourname';
+    document.getElementById('ig').href = 'https://www.instagram.com/yourname';
+    document.getElementById('dc').href = 'https://discordapp.com/users/your-id';
+    document.getElementById('kb').href = 'https://keybase.io/yourname';
+  </script>
+</body>
+</html>
